@@ -1,25 +1,28 @@
-// Navbar.js
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { Navbar, Nav, Image, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 const Header = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const handleLogin = () => {
-        history.push('/login');
+        navigate('/login');
     };
 
     return (
         <header className="bg-dark">
             <Navbar variant="dark" expand="lg" id="basic-nav">
-                <Image src="img/logo.png" />
+                <Link to="/">
+                    <Image src="img/logo.png" />
+                </Link>
                 <Navbar.Toggle aria-controls="navbar-nav" />
                 <Navbar.Collapse id="navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <NavDropdown title="Submenu" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#">Option 1</NavDropdown.Item>
                             <NavDropdown.Item href="#">Option 2</NavDropdown.Item>

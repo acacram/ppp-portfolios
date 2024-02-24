@@ -1,24 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './login';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Aquí es donde van a estar todas las páginas, donde ocurre el redireccionamiento
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Router>
+const history = createBrowserHistory();
+
+ReactDOM.render(
+  <Router history={history}>
     <React.StrictMode>
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/login" component={Login} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </React.StrictMode>
-  </Router>
+  </Router>,
+  document.getElementById('root')
 );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
