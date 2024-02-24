@@ -1,0 +1,7 @@
+.row {
+  padding: 2rem;
+  padding-right: 20rem;
+  padding-left: 20rem;
+  --bs-gutter-x: 1rem;
+  --bs-gutter-y: 1rem;
+}
