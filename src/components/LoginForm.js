@@ -1,53 +1,71 @@
 import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        // Your login logic here
-        console.log('Logging in with:', username, password);
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        
+        try {
+            const response = await fetch('http://localhost:5000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                console.log('Login successful');
+                // Redirige al usuario a www.google.es
+                window.location.href = 'http://localhost:3001/';
+            } else {
+                console.error('Login failed');
+                // Muestra un mensaje de error al usuario
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            // Muestra un mensaje de error al usuario
+        }
     };
 
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <div className="card">
-                        <div className="card-header">
+        <Container className="mt-5">
+            <Row className="justify-content-center">
+                <Col md={6}>
+                    <Card>
+                        <Card.Header>
                             <h3 className="text-center">Login</h3>
-                        </div>
-                        <div className="card-body">
-                            <form onSubmit={handleLogin}>
-                                <div className="form-group">
-                                    <label htmlFor="username">Username:</label>
-                                    <input
+                        </Card.Header>
+                        <Card.Body>
+                            <Form onSubmit={handleLogin}>
+                                <Form.Group>
+                                    <Form.Label>Usuario:</Form.Label>
+                                    <Form.Control
                                         type="text"
-                                        className="form-control"
-                                        id="username"
                                         placeholder="Enter your username"
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="password">Password:</label>
-                                    <input
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Contraseña:</Form.Label>
+                                    <Form.Control
                                         type="password"
-                                        className="form-control"
-                                        id="password"
                                         placeholder="Enter your password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
-                                </div>
-                                <button type="submit" className="btn btn-primary btn-block">Login</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                </Form.Group>
+                                <Button type="submit" variant="success" block>Login</Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

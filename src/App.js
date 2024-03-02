@@ -17,7 +17,7 @@ function App() {
       const response = await fetch('http://localhost:5000/cards');
       const data = await response.json();
       console.log('Data:', data); // Verifica los datos en la consola
-      setCards(data);
+      setCards(Array.isArray(data) ? data : []); // Asegurarse de que data sea un array antes de establecer el estado
     } catch (error) {
       console.error('Error fetching data:', error);
     }
