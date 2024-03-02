@@ -1,7 +1,23 @@
-.row {
-  padding: 2rem;
-  padding-right: 20rem;
-  padding-left: 20rem;
-  --bs-gutter-x: 1rem;
-  --bs-gutter-y: 1rem;
+.container {
+
+  height: fit-content; /* Mantenido para ocupar toda la altura de la ventana */
+  max-height: 100%;
+  color: white;
+}
+.card-image {
+  width: 100%;
+  height: auto;
+  max-width: 280px;
+  min-width: 100px;
+  aspect-ratio: 4/4;
+  object-fit: cover;
+  color: #000000;
+}
+.full-card {
+  width: 90%;
+  max-height: auto;
+  min-width: 90%;
+  max-width: 90%;
+  background-color: #d3cee1 !important;
+  align-items: center;
 }

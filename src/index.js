@@ -11,14 +11,15 @@ const history = createBrowserHistory();
 const root = createRoot(document.getElementById('root')); // Utiliza createRoot
 
 root.render(
+  <div>
   <Router history={history}>
     <React.StrictMode>
-      <Routes>
+      <Routes className="w-100 h-100">
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </React.StrictMode>
-  </Router>
+  </Router></div>
 );
 
 reportWebVitals();
