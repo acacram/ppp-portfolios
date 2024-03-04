@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth'); // Importa las rutas de autenticación
+// Importar las variables de entorno
+require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
 
 // Configura el middleware cors
 app.use(cors({
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 app.use('/auth', authRoutes);
 
 // Conexión a la base de datos
-mongoose.connect('mongodb+srv://acaceresr:TYzT8UEtKkleLGgE@cluster0.nvlfzx9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
 
@@ -36,4 +37,4 @@ app.get('/cards', async (req, res) => {
 });
 
 // Iniciar el servidor
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(process.env.PORT_BACK, () => console.log(`Server running on port ${process.env. PORT_BACK}`));

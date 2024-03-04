@@ -13,6 +13,10 @@ const Header = () => {
         navigate('/login');
     };
 
+    const handleSignUp = () => {
+        navigate('/signUp');
+    };
+
     return (
         <header className="bg-dark sticky-top d-flex justify-content-center w-100">
             <Navbar variant="dark"  id="basic-nav">
@@ -31,6 +35,7 @@ const Header = () => {
                         </NavDropdown>
                     </Nav>
                     <Button variant="primary" onClick={handleLogin}>Login</Button>
+                    <Button variant="primary" onClick={handleSignUp}>Sign Up</Button>
                     <Form inline className="navbar-nav ">
                         <FormControl type="search" placeholder="Search" className="" />
                         <Button variant="outline-success">Search</Button>

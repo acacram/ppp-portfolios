@@ -19,7 +19,7 @@ const Login = () => {
 
             if (response.ok) {
                 console.log('Login successful');
-                // Redirige al usuario a www.google.es
+                // Redirige al usuario a la página principal
                 window.location.href = 'http://localhost:3001/';
             } else {
                 console.error('Login failed');

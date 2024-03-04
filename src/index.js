@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './login';
+import SignUp from './signUp';
 import { createBrowserHistory } from 'history';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ root.render(
       <Routes className="w-100 h-100">
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signUp" element={<SignUp />} />
       </Routes>
     </React.StrictMode>
   </Router></div>
