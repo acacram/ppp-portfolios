@@ -5,31 +5,36 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+    // const handleLogin = async (e) => {
+    //     e.preventDefault();
         
-        try {
-            const response = await fetch('http://localhost:5000/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            });
+    //     try {
+    //         const response = await fetch('http://localhost:5000/auth/login', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({ username, password }),
+    //         });
 
-            if (response.ok) {
-                console.log('Login successful');
-                // Redirige al usuario a la página principal
-                window.location.href = 'http://localhost:3001/';
-            } else {
-                console.error('Login failed');
-                // Muestra un mensaje de error al usuario
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-            // Muestra un mensaje de error al usuario
-        }
-    };
+    //         if (response.ok) {
+    //             console.log('Login successful');
+    //             // Redirige al usuario a la página principal
+    //             window.location.href = 'http://localhost:3001/';
+    //         } else {
+    //             console.error('Login failed');
+    //             // Muestra un mensaje de error al usuario
+    //         }
+    //     } catch (error) {
+    //         console.error('Error during login:', error);
+    //         // Muestra un mensaje de error al usuario
+    //     }
+    // };
+
+    const handleLogin = async (e) => {
+        // Call auth controller
+        e.preventDefault();
+    }
 
     return (
         <Container className="mt-5">

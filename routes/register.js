@@ -3,24 +3,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
-// Login route
-router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-
-    try {
-        const user = await User.findOne({ username, password });
-
-        if (!user) {
-            return res.status(401).json({ message: 'Invalid username or password' });
-        }
-
-        return res.json({ message: 'Login successful' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
-});
-
 // Registration route
 router.post('/signUp', async (req, res) => {
     const { username, password, fullName } = req.body;

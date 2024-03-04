@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth'); // Importa las rutas de autenticación
+const registerRoutes = require('./routes/register'); // Importa las rutas de registro
 // Importar las variables de entorno
 require('dotenv').config();
 
@@ -21,6 +22,8 @@ app.use(bodyParser.json());
 
 // Rutas de autenticación
 app.use('/auth', authRoutes);
+// Rutas de registro de usuario
+app.use('/register', registerRoutes);
 
 // Conexión a la base de datos
 mongoose.connect('mongodb+srv://acaceresr:TYzT8UEtKkleLGgE@cluster0.nvlfzx9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
