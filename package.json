@@ -22,7 +22,7 @@
   "scripts": {
     "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "start-frontend": "node -r dotenv/config -e \"process.env.PORT = process.env.PORT_FRONT; require('react-scripts/scripts/start');\"",
-    "start-backend": "node server.js"
+    "start-backend": "node -r dotenv/config server.js"
   },
   "eslintConfig": {
     "extends": [
