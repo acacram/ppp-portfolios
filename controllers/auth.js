@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { sync } = require('resolve');
 
-exports.login = async (req, res) => {
+const loginCtrl = async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -26,10 +26,9 @@ exports.login = async (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
-};
+}
 
-
-exports.register = async (req, res) => {
+const registerCtrl = async (req, res) => {
     const { username, password, fullName } = req.body;
 
     try {
@@ -52,21 +51,4 @@ exports.register = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
-    const { username } = req.body;
-
-    try {
-        const user = await User.findOne({ username });
-
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        await User.deleteOne({ _id: user._id });
-
-        res.status(200).json({ message: 'User deleted successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
-}
+module.exports = { registerCtrl, loginCtrl };

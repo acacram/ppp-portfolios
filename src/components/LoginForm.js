@@ -45,6 +45,8 @@ const Login = () => {
                             <h3 className="text-center">Login</h3>
                         </Card.Header>
                         <Card.Body>
+                            {/* Call auth controller to login */}
+                            
                             <Form onSubmit={handleLogin}>
                                 <Form.Group>
                                     <Form.Label>Usuario:</Form.Label>
