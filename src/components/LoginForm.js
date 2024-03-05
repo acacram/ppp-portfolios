@@ -1,41 +1,38 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-    // const handleLogin = async (e) => {
-    //     e.preventDefault();
-        
-    //     try {
-    //         const response = await fetch('http://localhost:5000/auth/login', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({ username, password }),
-    //         });
-
-    //         if (response.ok) {
-    //             console.log('Login successful');
-    //             // Redirige al usuario a la página principal
-    //             window.location.href = 'http://localhost:3001/';
-    //         } else {
-    //             console.error('Login failed');
-    //             // Muestra un mensaje de error al usuario
-    //         }
-    //     } catch (error) {
-    //         console.error('Error during login:', error);
-    //         // Muestra un mensaje de error al usuario
-    //     }
-    // };
+    const navigate = useNavigate(); 
 
     const handleLogin = async (e) => {
-        // Call auth controller
         e.preventDefault();
-    }
+        
+        try {
+            const response = await fetch('http://localhost:5000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
 
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('token', data.token); //token
+                console.log('Logeadoo');
+                navigate('/'); // Redirige al usuario a la página de inicio
+            } else {
+                console.error('erroc');
+            }
+        } catch (error) {
+            console.error('Error :', error);
+        }
+    };
+
+    // Formulario
     return (
         <Container className="mt-5">
             <Row className="justify-content-center">
@@ -74,4 +71,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LoginForm;

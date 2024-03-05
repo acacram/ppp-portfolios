@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+    default: 'user', // pq no va a ser admin
     required: true,
   }
 });

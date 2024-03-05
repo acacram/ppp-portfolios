@@ -3,7 +3,6 @@ import { Card, Row, Col, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import mockApiResponse from './data.json'; // Import data from data.json
 import './App.css';
 
 function App() {

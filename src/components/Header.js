@@ -4,9 +4,10 @@ import { Navbar, Nav, Image, NavDropdown, Form, FormControl, Button } from 'reac
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { Link } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import { Autenticado } from '../components/Autenticado';
 
 const Header = () => {
+    const { isLogin } = Autenticado();
 
     const navigate = useNavigate();
     const handleLogin = () => {
@@ -34,8 +35,13 @@ const Header = () => {
                             <NavDropdown.Item href="#">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Button variant="primary" onClick={handleLogin}>Login</Button>
-                    <Button variant="primary" onClick={handleSignUp}>Sign Up</Button>
+                    {!isLogin && (
+    <React.Fragment>
+        <Button variant="primary" onClick={handleLogin} block>Login</Button>
+        <Button type="submit" variant="success" onClick={handleSignUp} block>Sign Up</Button>
+    </React.Fragment>
+)}
+
                     <Form inline className="navbar-nav ">
                         <FormControl type="search" placeholder="Search" className="" />
                         <Button variant="outline-success">Search</Button>

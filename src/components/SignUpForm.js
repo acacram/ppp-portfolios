@@ -3,7 +3,6 @@ import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 
 const SignUp = () => {
     const [username, setUsername] = useState('');
-    const [fullName, setFullName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -12,29 +11,26 @@ const SignUp = () => {
     
         if (password !== confirmPassword) {
             console.error('Passwords do not match');
-            // Display an error message to the user
+            // Muestra un mensaje de error al usuario
             return;
         }
     
         try {
-            const response = await fetch('http://localhost:5000/auth/signUp', {
+            const response = await fetch('http://localhost:5000/auth/signup', { // Aquí debes asegurarte de que la URL sea correcta
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, fullName, password, role: 'user' }), // Include the default role here
+                body: JSON.stringify({ username, password }), // Solo envía el nombre de usuario y la contraseña al servidor
             });
     
             if (response.ok) {
                 console.log('SignUp successful');
-                // Optionally, you may want to redirect the user to the login page
             } else {
                 console.error('SignUp failed');
-                // Display an error message to the user
             }
         } catch (error) {
             console.error('Error during SignUp:', error);
-            // Display an error message to the user
         }
     };    
 
@@ -57,15 +53,7 @@ const SignUp = () => {
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </Form.Group>
-                                <Form.Group>
-                                    <Form.Label>Full Name:</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter your full name"
-                                        value={fullName}
-                                        onChange={(e) => setFullName(e.target.value)}
-                                    />
-                                </Form.Group>
+                             
                                 <Form.Group>
                                     <Form.Label>Password:</Form.Label>
                                     <Form.Control
