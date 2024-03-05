@@ -20,10 +20,13 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // Importar rutas
 const authRoutes = require('./routes/authRoutes');
 const cardsRoutes = require('./routes/cards');
+const usersRoutes = require('./routes/users');
 
 // Rutas
 app.use('/auth', authRoutes); // Monta las rutas de autenticación en /auth
 app.use('/cards', cardsRoutes);
+
+app.use('/users', usersRoutes);
 
 // Iniciar el servidor
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
