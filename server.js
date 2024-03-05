@@ -1,5 +1,4 @@
 // server.js
-
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -21,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // Importar rutas
 const authRoutes = require('./routes/authRoutes');
 const cardsRoutes = require('./routes/cards');
+
 // Rutas
 app.use('/auth', authRoutes); // Monta las rutas de autenticación en /auth
 app.use('/cards', cardsRoutes);

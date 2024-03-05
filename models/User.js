@@ -1,6 +1,6 @@
 // models/User.js
 const mongoose = require('mongoose');
- 
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -19,7 +19,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'user', // pq no va a ser admin
     required: true,
-  }
+  },
+
+  // Reference id cards
+  cards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Card' }]
 });
- 
+
 module.exports = mongoose.model('User', userSchema);
