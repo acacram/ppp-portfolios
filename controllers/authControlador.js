@@ -16,7 +16,7 @@ async function login(req, res) {
 
         // Genera el token de autenticación
         const token = jwt.sign({ username }, 'secret_key', { expiresIn: '1h' }); // Usar tu propia clave secreta
-console.log("Logeado")
+
         // Responde con el token
         res.json({ token });
     } catch (error) {
@@ -25,4 +25,16 @@ console.log("Logeado")
     }
 }
 
-module.exports = { login };
+async function logout(req, res) {
+    try {
+      
+
+        // Respuesta exitosa
+        res.status(200).json({ message: 'Logout successful' });
+    } catch (error) {
+        console.error('Error during logout:', error);
+        res.status(500).json({ message: 'Error during logout' });
+    }
+}
+
+module.exports = { login, logout };

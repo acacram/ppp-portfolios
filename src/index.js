@@ -14,6 +14,7 @@ import { AuthProvider } from './components/Autenticado'; // para saber el estado
 const history = createBrowserHistory();
 const root = createRoot(document.getElementById('root')); // Utiliza createRoot
 
+// VISTAS
 root.render(
   <AuthProvider>
     <Router history={history}>

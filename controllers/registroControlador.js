@@ -17,6 +17,7 @@ async function signup(req, res) {
         await newUser.save();
 
         console.log("registrao") ;
+        res.json({ message: 'Registro exitoso' });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'Error' });

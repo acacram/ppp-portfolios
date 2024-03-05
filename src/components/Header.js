@@ -1,26 +1,22 @@
-import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { Navbar, Nav, Image, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { Link } from 'react-router-dom';
-import { Autenticado } from '../components/Autenticado';
 
 const Header = () => {
-    const { isLogin } = Autenticado();
+    const token = localStorage.getItem('token');
 
-    const navigate = useNavigate();
-    const handleLogin = () => {
-        navigate('/login');
-    };
-
-    const handleSignUp = () => {
-        navigate('/signUp');
+    const handleLogout = () => {
+        // Limpiar la sesión del usuario (eliminar el token del localStorage)
+        localStorage.removeItem('token');
+        // Redirigir al usuario a la página de inicio
+        window.location.href = '/';
     };
 
     return (
         <header className="bg-dark sticky-top d-flex justify-content-center w-100">
-            <Navbar variant="dark"  id="basic-nav">
+            <Navbar variant="dark" id="basic-nav">
                 <Link to="/">
                     <Image src="img/logo.png" />
                 </Link>
@@ -35,13 +31,14 @@ const Header = () => {
                             <NavDropdown.Item href="#">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    {!isLogin && (
-    <React.Fragment>
-        <Button variant="primary" onClick={handleLogin} block>Login</Button>
-        <Button type="submit" variant="success" onClick={handleSignUp} block>Sign Up</Button>
-    </React.Fragment>
-)}
-
+                    {token ? (
+                        <Button variant="danger" onClick={handleLogout} block>Logout</Button>
+                    ) : (
+                        <>
+                            <Button variant="primary" as={Link} to="/login" block>Login</Button>
+                            <Button variant="success" as={Link} to="/signUp" block>Sign Up</Button>
+                        </>
+                    )}
                     <Form inline className="navbar-nav ">
                         <FormControl type="search" placeholder="Search" className="" />
                         <Button variant="outline-success">Search</Button>

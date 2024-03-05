@@ -8,13 +8,13 @@ const SignUp = () => {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
-    
+
         if (password !== confirmPassword) {
             console.error('Passwords do not match');
             // Muestra un mensaje de error al usuario
             return;
         }
-    
+
         try {
             const response = await fetch('http://localhost:5000/auth/signup', { // Aquí debes asegurarte de que la URL sea correcta
                 method: 'POST',
@@ -23,7 +23,7 @@ const SignUp = () => {
                 },
                 body: JSON.stringify({ username, password }), // Solo envía el nombre de usuario y la contraseña al servidor
             });
-    
+
             if (response.ok) {
                 console.log('SignUp successful');
             } else {
@@ -32,7 +32,7 @@ const SignUp = () => {
         } catch (error) {
             console.error('Error during SignUp:', error);
         }
-    };    
+    };
 
     return (
         <Container className="mt-5">
@@ -53,7 +53,7 @@ const SignUp = () => {
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </Form.Group>
-                             
+
                                 <Form.Group>
                                     <Form.Label>Password:</Form.Label>
                                     <Form.Control
