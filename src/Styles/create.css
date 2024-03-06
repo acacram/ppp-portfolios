@@ -1,0 +1,9 @@
+/* React entra en conflico si en hay dos classes iguales */
+.containerCreate {
+  display: auto;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  width:auto;
+  height: 200%;
+}

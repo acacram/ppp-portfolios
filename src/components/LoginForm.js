@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
+import '../Styles/App.css';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -34,7 +36,7 @@ const LoginForm = () => {
 
     // Formulario
     return (
-        <Container className="mt-5">
+        <><Header /><Container className="mt-5">
             <Row className="justify-content-center">
                 <Col md={6}>
                     <Card>
@@ -49,8 +51,7 @@ const LoginForm = () => {
                                         type="text"
                                         placeholder="Enter your username"
                                         value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
-                                    />
+                                        onChange={(e) => setUsername(e.target.value)} />
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.Label>Contraseña:</Form.Label>
@@ -58,8 +59,7 @@ const LoginForm = () => {
                                         type="password"
                                         placeholder="Enter your password"
                                         value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
+                                        onChange={(e) => setPassword(e.target.value)} />
                                 </Form.Group>
                                 <Button type="submit" variant="success" block>Login</Button>
                             </Form>
@@ -67,7 +67,7 @@ const LoginForm = () => {
                     </Card>
                 </Col>
             </Row>
-        </Container>
+        </Container></>
     );
 };
 

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
-import Footer from './components/Footer';
-import './App.css';
+import './Styles/App.css';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -27,7 +26,7 @@ function App() {
 
   return (
     <>
-      <Header />
+    <Header/>
       {/* Añade el contenedor principal que rodea a todo el contenido de la app */}
       <Container className=' border  border-3 border-info w-100 h-100'>
         {/* Añade el contenido principal en la app */}
@@ -53,7 +52,6 @@ function App() {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </>
   );
 }

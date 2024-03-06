@@ -7,7 +7,7 @@ async function getItems(req, res) {
     res.json(items);
 }
 
-// Obtener un detalle
+// Obtener un detalle por ID
 async function getUserInfo(req, res) {
     try {
         const { _id } = req.params;

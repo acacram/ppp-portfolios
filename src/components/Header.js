@@ -1,9 +1,10 @@
 import React from 'react';
 import { Navbar, Nav, Image, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
 import { Link } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const notify = () => toast("Has presionado el botón");
 const Header = () => {
     const token = localStorage.getItem('token');
 
@@ -32,21 +33,34 @@ const Header = () => {
                         </NavDropdown>
                     </Nav>
                     {token ? (
-                        <Button variant="danger" onClick={handleLogout} block>Logout</Button>
+                        <>
+                            <Button className="ml-auto" variant="secondary" as={Link} to="/create">Crear</Button>
+                            <Button variant="info" as={Link} to="/userDashboard" block>Perfil</Button>
+                        </>
                     ) : (
                         <>
                             <Button variant="primary" as={Link} to="/login" block>Login</Button>
                             <Button variant="success" as={Link} to="/signUp" block>Sign Up</Button>
+                            <Button variant="warning" as={Link} to="" block onClick={notify}>React-Toastify</Button>
+                            <ToastContainer />
                         </>
                     )}
-                    <Form inline className="navbar-nav ">
+                    <Form inline className="navbar-nav">
                         <FormControl type="search" placeholder="Search" className="" />
-                        <Button variant="outline-success">Search</Button>
+                        <Button className="ms-4" variant="outline-success">Buscar</Button>
+                        {token ? (
+                            <Button variant="danger" onClick={handleLogout} block>Logout</Button>
+                        ) : (
+                            <>
+                                {/* Puedes agregar más elementos aquí si es necesario */}
+                            </>
+                        )}
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
         </header>
     );
 }
+
 
 export default Header;
