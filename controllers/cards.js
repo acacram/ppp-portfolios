@@ -24,10 +24,17 @@ async function getItem(req, res) {
 // Obtener varios detalles de un usuario
 async function getItemsById(req, res) {
     try {
-        const userId = req.user._id; // Asegúrate de que req.user contenga la información del usuario actual
-        const items = await Cards.find({ userId });
+        // Obtiene el ID del usuario desde los parámetros de la ruta
+        const userId = req.params._id;
+        console.log('User ID:', userId);
+
+        // Busca en la base de datos los elementos asociados al usuario
+        const items = await Cards.find({ user: userId });
+
+        // Responde con los elementos obtenidos en formato JSON
         res.json(items);
     } catch (error) {
+        // Maneja cualquier error que pueda ocurrir durante la operación
         console.error('Error fetching items:', error);
         res.status(500).json({ message: 'Error' });
     }
