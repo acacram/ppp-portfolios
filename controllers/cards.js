@@ -46,21 +46,20 @@ async function updateItem(req, res) {
     const { title, text, date, image } = req.body;
 
     try {
-        const updateItem = await Cards.findByIdAndUpdate(
+        const updatedItem = await Cards.findByIdAndUpdate(
             _id,
             { title, text, date, image },
             { new: true }
         );
 
-        if (updateItem) {
+        if (updatedItem) {
             res.status(200).json("Registro actualizado");
         } else {
-            rest.status(404).json("Registro no encontrado");
+            res.status(404).json("Registro no encontrado");
         }
     } catch (error) {
         res.status(500).json({ error: "Error al actualizar el registro" });
     }
-
 }
 
 // Eliminar un registro

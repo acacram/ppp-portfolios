@@ -26,10 +26,10 @@ router.get('/', cards.getItems);
 
 // Post routes for back
 router.post('/createItem', cards.createItem)
-router.post('/getItem/:_id', cards.getItem)
+router.get('/getItem/:_id', cards.getItem)
 
 // Patch routes for back
-router.patch('/updateItem/:_id', cards.updateItem)
+router.put('/updateItem/:_id', cards.updateItem)
 
 // delete routes for back
 router.post('/deleteItem/:_id', cards.deleteItem)
