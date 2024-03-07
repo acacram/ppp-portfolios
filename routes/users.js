@@ -29,7 +29,7 @@ router.post('/createItem', users.createItem)
 router.get('/getUserInfo/:_id', users.getUserInfo)
 
 // Patch routes for back
-router.patch('/updateItem/:_id', users.updateItem)
+router.put('/updateItem/:_id', users.updateItem)
 
 // delete routes for back
 router.post('/deleteItem/:_id', users.deleteItem)

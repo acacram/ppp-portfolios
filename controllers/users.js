@@ -44,26 +44,29 @@ async function createItem(req, res) {
 // Actualizar un registro
 async function updateItem(req, res) {
     const { _id } = req.params;
-
     const { username, password } = req.body;
 
     try {
+        // Hashear la nueva contraseña si se proporciona
+        const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
+
+        // Actualizar el registro
         const updateItem = await Users.findByIdAndUpdate(
             _id,
-            { username, password },
+            { username, password: hashedPassword },  // Utiliza la contraseña hasheada
             { new: true }
         );
 
         if (updateItem) {
             res.status(200).json("Registro actualizado");
         } else {
-            rest.status(404).json("Registro no encontrado");
+            res.status(404).json("Registro no encontrado");
         }
     } catch (error) {
         res.status(500).json({ error: "Error al actualizar el registro" });
     }
-
 }
+
 
 // Eliminar un registro
 async function deleteItem(req, res) {
