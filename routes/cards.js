@@ -23,6 +23,7 @@ router.delete('/deleteItem/:_id', async (req, res) => {
 
 // Get routes for back
 router.get('/', cards.getItems);
+router.get('/getItemsById/:_id', cards.getItemsById);
 
 // Post routes for back
 router.post('/createItem', cards.createItem)

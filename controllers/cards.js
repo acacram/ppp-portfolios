@@ -21,6 +21,18 @@ async function getItem(req, res) {
     }
 }
 
+// Obtener varios detalles de un usuario
+async function getItemsById(req, res) {
+    try {
+        const userId = req.user._id; // Asegúrate de que req.user contenga la información del usuario actual
+        const items = await Cards.find({ userId });
+        res.json(items);
+    } catch (error) {
+        console.error('Error fetching items:', error);
+        res.status(500).json({ message: 'Error' });
+    }
+}
+
 // Insertar un registro
 async function createItem(req, res) {
     // const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -43,12 +55,12 @@ async function createItem(req, res) {
 async function updateItem(req, res) {
     const { _id } = req.params;
 
-    const { title, text, date, image } = req.body;
+    const { title, text, date, image, user } = req.body;
 
     try {
         const updatedItem = await Cards.findByIdAndUpdate(
             _id,
-            { title, text, date, image },
+            { title, text, date, image, $addToSet: { user: { $each: user } } },
             { new: true }
         );
 
@@ -87,5 +99,5 @@ async function deleteItem(req, res) {
 //     }
 // };
 
-module.exports = { getItems, getItem, createItem, updateItem, deleteItem };
+module.exports = { getItems, getItem, getItemsById, createItem, updateItem, deleteItem };
 
