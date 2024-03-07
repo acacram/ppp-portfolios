@@ -46,8 +46,6 @@ const Header = () => {
                         </>
                     )}
                     <Form inline className="navbar-nav">
-                        <FormControl type="search" placeholder="Search" className="" />
-                        <Button className="ms-4" variant="outline-success">Buscar</Button>
                         {token ? (
                             <Button variant="danger" onClick={handleLogout} block>Logout</Button>
                         ) : (

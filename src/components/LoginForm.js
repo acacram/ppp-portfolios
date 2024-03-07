@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// Importa useState, useEffect y otros módulos necesarios
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
@@ -8,6 +9,15 @@ const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate(); 
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            // Si hay un token en el almacenamiento local, redirige al usuario a la página de inicio
+            navigate('/');
+        }
+    }, [navigate]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -24,17 +34,17 @@ const LoginForm = () => {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('token', data.token); //token
-                console.log('Logeadoo');
                 navigate('/'); // Redirige al usuario a la página de inicio
             } else {
-                console.error('erroc');
+                // Manejo de errores
+                const errorData = await response.json();
+                setError(errorData.message);
             }
         } catch (error) {
             console.error('Error :', error);
         }
     };
 
-    // Formulario
     return (
         <><Header /><Container className="mt-5">
             <Row className="justify-content-center">
@@ -44,6 +54,7 @@ const LoginForm = () => {
                             <h3 className="text-center">Login</h3>
                         </Card.Header>
                         <Card.Body>
+                            {error && <div className="alert alert-danger" role="alert">{error}</div>}
                             <Form onSubmit={handleLogin}>
                                 <Form.Group>
                                     <Form.Label>Usuario:</Form.Label>

@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const Cards = require('../models/Card');
+const { v4: uuidv4 } = require('uuid');
 
 // Obtener lista de la base de datos
 async function getItems(req, res) {
@@ -20,54 +21,44 @@ async function getItem(req, res) {
         res.status(500).json({ message: 'Error' });
     }
 }
-
-// Obtener varios detalles de un usuario
-async function getItemsById(req, res) {
-    try {
-        // Obtiene el ID del usuario desde los parámetros de la ruta
-        const userId = req.params._id;
-        console.log('User ID:', userId);
-
-        // Busca en la base de datos los elementos asociados al usuario
-        const items = await Cards.find({ user: userId });
-
-        // Responde con los elementos obtenidos en formato JSON
-        res.json(items);
-    } catch (error) {
-        // Maneja cualquier error que pueda ocurrir durante la operación
-        console.error('Error fetching items:', error);
-        res.status(500).json({ message: 'Error' });
-    }
-}
-
-// Insertar un registro
-async function createItem(req, res) {
-    // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const {
-        title,
-        text,
-        date,
-        image } = req.body;
+const createItem = async (req, res) => {
+    const { title, text, visible, userId } = req.body;
 
     try {
-        const card = new Cards({ title, text, date, image });
+        let image = null;
+        if (req.file) {
+            // Obtener el nombre del archivo de imagen
+            const imageName = req.file.originalname;
+            // Construir la URL sin la carpeta public
+            image = `/imagenes/${imageName}`; // Ruta relativa a la carpeta public
+        }
+
+        const card = new Cards({ title, text, visible, image, user: userId });
         await card.save();
+
         res.status(200).json({ message: 'Registro exitoso' });
     } catch (error) {
+        console.error('Error al crear la carta:', error);
         res.status(500).json({ message: 'Error' });
     }
-}
+};
+
+
+
+
+
+
 
 // Actualizar un registro
 async function updateItem(req, res) {
     const { _id } = req.params;
 
-    const { title, text, date, image, user } = req.body;
+    const { title, text, date, image } = req.body;
 
     try {
         const updatedItem = await Cards.findByIdAndUpdate(
             _id,
-            { title, text, date, image, $addToSet: { user: { $each: user } } },
+            { title, text, date, image },
             { new: true }
         );
 
@@ -96,15 +87,15 @@ async function deleteItem(req, res) {
     }
 }
 
-// async function deleteItem(req, res) {
-//     try {
-//         const { id } = req.params;
-//         const data = await Cards.delete({ _id: id });
-//         res.send({ data });
-//     } catch (e) {
-//         handleHttpError(res, "ERROR_DELETE_ITEM");
-//     }
-// };
+async function deleteItem(req, res) {
+    try {
+        const { id } = req.params;
+        const data = await Cards.delete({ _id: id });
+        res.send({ data });
+    } catch (e) {
+        handleHttpError(res, "ERROR_DELETE_ITEM");
+    }
+};
 
-module.exports = { getItems, getItem, getItemsById, createItem, updateItem, deleteItem };
+module.exports = { getItems, getItem, createItem, updateItem, deleteItem };
 

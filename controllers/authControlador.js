@@ -14,16 +14,17 @@ async function login(req, res) {
             return res.status(401).json({ message: 'Credenciales inválidas' });
         }
 
-        // Genera el token de autenticación
-        const token = jwt.sign({ username }, 'secret_key', { expiresIn: '1h' }); // Usar tu propia clave secreta
+        // Genera el token de autenticación con el ID del usuario
+        const token = jwt.sign({ userId: user._id }, 'secret_key', { expiresIn: '1h' }); // Usar tu propia clave secreta
 
-        // Responde con el token
-        res.json({ token });
+        // Responde con el token y el ID del usuario
+        res.json({ token, userId: user._id });
     } catch (error) {
-        console.error('Error during login:', error);
-        res.status(500).json({ message: 'Error during login' });
+        console.error('Error durante el inicio de sesión:', error);
+        res.status(500).json({ message: 'Error durante el inicio de sesión' });
     }
 }
+
 
 async function logout(req, res) {
     try {

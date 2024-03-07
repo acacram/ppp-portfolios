@@ -44,7 +44,7 @@ async function createItem(req, res) {
 // Actualizar un registro
 async function updateItem(req, res) {
     const { _id } = req.params;
-    const { username, password, cards } = req.body;
+    const { username, password } = req.body;
 
     try {
         // Hashear la nueva contraseña si se proporciona
@@ -53,7 +53,7 @@ async function updateItem(req, res) {
         // Actualizar el registro
         const updateItem = await Users.findByIdAndUpdate(
             _id,
-            { username, password: hashedPassword, $addToSet: { cards: { $each: cards } } },
+            { username, password: hashedPassword },  // Utiliza la contraseña hasheada
             { new: true }
         );
 
