@@ -15,6 +15,9 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  visible: {
+    type: Boolean,
+  },
   date: {
     type: String,
     required: true,

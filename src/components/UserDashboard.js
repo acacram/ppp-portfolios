@@ -16,7 +16,7 @@ function UserDashboard() {
     // Fetch data from DB
     const fetchDataFromDatabase = async () => {
         try {
-            const response = await fetch('http://localhost:5000/cards');
+            const response = await fetch('http://localhost:5000/cards/getItem/{_id}');
             const data = await response.json();
             console.log('Data:', data); // Verifica los datos en la consola
             setCards(Array.isArray(data) ? data : []); // Asegurarse de que data sea un array antes de establecer el estado
