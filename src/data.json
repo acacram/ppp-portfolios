@@ -1,92 +1,68 @@
 [
-    {
-        "title": "Primer Ejemplo",
-        "text": "Este es un ejemplo de JSON con título, texto y pie de página.",
-        "footer": "Pie de página - Información adicional",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Segundo Ejemplo",
-        "text": "Este es otro ejemplo de JSON con diferentes datos.",
-        "footer": "Pie de página - Otra información",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Tercer Ejemplo",
-        "text": "Aquí va el texto del tercer ejemplo.",
-        "footer": "Pie de página - Detalles adicionales",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Cuarto Ejemplo",
-        "text": "Información del cuarto ejemplo en este campo de texto.",
-        "footer": "Pie de página - Detalles importantes",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Quinto Ejemplo",
-        "text": "Texto del quinto ejemplo para ilustrar la estructura JSON.",
-        "footer": "Pie de página - Últimos detalles",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Sexto Ejemplo",
-        "text": "Información del cuarto ejemplo en este campo de texto.",
-        "footer": "Pie de página - Detalles importantes",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Septimo Ejemplo",
-        "text": "Texto del quinto ejemplo para ilustrar la estructura JSON.",
-        "footer": "Pie de página - Últimos detalles",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Octavo Ejemplo",
-        "text": "Información del cuarto ejemplo en este campo de texto.",
-        "footer": "Pie de página - Detalles importantes",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Noveno Ejemplo",
-        "text": "Texto del quinto ejemplo para ilustrar la estructura JSON.",
-        "footer": "Pie de página - Últimos detalles",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Decimo Ejemplo",
-        "text": "Información del cuarto ejemplo en este campo de texto.",
-        "footer": "Pie de página - Detalles importantes",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Onceavo Ejemplo",
-        "text": "Texto del quinto ejemplo para ilustrar la estructura JSON.",
-        "footer": "Pie de página - Últimos detalles",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Dosceavo Ejemplo",
-        "text": "Información del cuarto ejemplo en este campo de texto.",
-        "footer": "Pie de página - Detalles importantes",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Tresceavo Ejemplo",
-        "text": "Texto del quinto ejemplo para ilustrar la estructura JSON.",
-        "footer": "Pie de página - Últimos detalles",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Catorceavo Ejemplo",
-        "text": "Información del cuarto ejemplo en este campo de texto.",
-        "footer": "Pie de página - Detalles importantes",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    },
-    {
-        "title": "Quinceavo Ejemplo",
-        "text": "Texto del quinto ejemplo para ilustrar la estructura JSON.",
-        "footer": "Pie de página - Últimos detalles",
-        "image": "https://i.imgur.com/eoMMulu.png"
-    }
+  {
+    "title": "Card Title 1",
+    "text": "This is the text for card 1. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-01"
+  },
+  {
+    "title": "Card Title 2",
+    "text": "This is the text for card 2. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-02"
+  },
+  {
+    "title": "Card Title 3",
+    "text": "This is the text for card 3. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-03"
+  },
+  {
+    "title": "Card Title 4",
+    "text": "This is the text for card 4. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-04"
+  },
+  {
+    "title": "Card Title 5",
+    "text": "This is the text for card 5. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-05"
+  },
+  {
+    "title": "Card Title 6",
+    "text": "This is the text for card 6. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-06"
+  },
+  {
+    "title": "Card Title 7",
+    "text": "This is the text for card 7. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-07"
+  },
+  {
+    "title": "Card Title 8",
+    "text": "This is the text for card 8. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-08"
+  },
+  {
+    "title": "Card Title 9",
+    "text": "This is the text for card 9. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-09"
+  },
+  {
+    "title": "Card Title 10",
+    "text": "This is the text for card 10. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-10"
+  },
+  {
+    "title": "Card Title 11",
+    "text": "This is the text for card 11. It's just an example to illustrate how you might describe the card.",
+    "image": "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
+    "date": "2024-03-11"
+  }
 ]

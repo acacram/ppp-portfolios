@@ -42,9 +42,13 @@ const LoginForm = () => {
           backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
           className: "info",
           position: "center",
-          marginTop: "40%",
-          // paddingTop: "400px",
-          duration: 3000,
+          gravity: "top",
+          top: "120px",
+          offset: {
+            x: 0,
+            y: 45,
+          },
+          duration: 2000,
         }).showToast();
       } else {
         // Manejo de errores

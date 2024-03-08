@@ -7,83 +7,10 @@ import "./Styles/App.css";
 function App() {
   const [cards, setCards] = useState([]);
   const [exampleCards] = useState([
-    {
-      title: "Card Title 1",
-      text: "This is the text for card 1. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-01",
-    },
-    {
-      title: "Card Title 2",
-      text: "This is the text for card 2. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-02",
-    },
-    {
-      title: "Card Title 3",
-      text: "This is the text for card 3. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-03",
-    },
-    {
-      title: "Card Title 4",
-      text: "This is the text for card 4. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-04",
-    },
-    {
-      title: "Card Title 5",
-      text: "This is the text for card 5. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-05",
-    },
-    {
-      title: "Card Title 6",
-      text: "This is the text for card 6. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-06",
-    },
-    {
-      title: "Card Title 7",
-      text: "This is the text for card 7. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-07",
-    },
-    {
-      title: "Card Title 8",
-      text: "This is the text for card 8. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-08",
-    },
-    {
-      title: "Card Title 9",
-      text: "This is the text for card 9. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-09",
-    },
-    {
-      title: "Card Title 10",
-      text: "This is the text for card 10. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-10",
-    },
-    {
-      title: "Card Title 11",
-      text: "This is the text for card 11. It's just an example to illustrate how you might describe the card.",
-      image:
-        "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg",
-      date: "2024-03-11",
-    },
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => setCards(data))
+      .catch((error) => console.error(error))
   ]);
   // function generateCardsData(numberOfCards) {
   //   const baseUrl =
