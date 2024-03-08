@@ -14,14 +14,32 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Styles/header.css";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
+import { useNavigate } from "react-router-dom";
 const notify = () => toast("Has presionado el botón");
 
 const Header = ({ setSearchTitle }) => {
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/";
+    navigate("/");
+
+    Toastify({
+      text: "Se ha cerrado la sesión correctamente",
+      backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+      className: "info",
+      position: "center",
+      gravity: "top",
+      top: "120px",
+      offset: {
+        x: 0,
+        y: 45,
+      },
+      duration: 2000,
+    }).showToast();
   };
 
   return (

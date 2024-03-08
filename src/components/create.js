@@ -74,7 +74,13 @@ const Create = () => {
           backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
           className: "info",
           position: "center",
-          duration: 7000,
+          gravity: "top",
+          top: "120px",
+          offset: {
+            x: 0,
+            y: 45,
+          },
+          duration: 2000,
         }).showToast();
       }
     } catch (error) {
