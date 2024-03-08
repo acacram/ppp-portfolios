@@ -101,6 +101,22 @@ function App() {
     fetchData();
   }, []);
 
+
+  function formatPublishedDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+      return 'Publicado hoy';
+    } else if (diffDays === 1) {
+      return 'Publicado hace 1 día';
+    } else {
+      return `Publicado hace ${diffDays} días`;
+    }
+  }
+
   // Fetch data from DB
 
   return (
@@ -137,7 +153,7 @@ function App() {
                         <h3 className="mt-2 overflow-ellipsis">{card.title}</h3>
                         <p className="card-text text-center">{card.text}</p>
                         <p className=" border-2 border border-black p-2 rounded-4">
-                          {new Date(card.date).toISOString().split("T")[0]}
+                          {formatPublishedDate(card.date)}
                         </p>
                       </Card>
                     </Col>
