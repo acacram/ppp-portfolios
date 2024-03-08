@@ -9,6 +9,7 @@ import Login from './components/LoginForm';
 import SignUp from './components/SignUpForm';
 import UserDashboard from './components/UserDashboard';
 import Create from './components/create';
+import Edit from './components/edit';
 import { createBrowserHistory } from 'history';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
