@@ -95,7 +95,12 @@ const LoginForm = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </Form.Group>
-                  <Button type="submit" variant="success" block>
+                  <Button
+                    className="mt-3"
+                    type="submit"
+                    variant="success"
+                    block
+                  >
                     Login
                   </Button>
                 </Form>

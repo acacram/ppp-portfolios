@@ -57,19 +57,6 @@ const Header = ({ setSearchTitle }) => {
             style={{ maxHeight: "100px", color: "white" }}
             navbarScroll
           >
-            <Nav.Link as={Link} className="text-white fw-bold" to="/">
-              Home
-            </Nav.Link>
-            <NavDropdown
-              title={"Submenu"}
-              className="fw-bold "
-              id="nav-dropdown"
-            >
-              <NavDropdown.Item href="#">Option 1</NavDropdown.Item>
-              <NavDropdown.Item href="#">Option 2</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#">Separated link</NavDropdown.Item>
-            </NavDropdown>
             {token ? (
               <>
                 <Button
@@ -110,17 +97,6 @@ const Header = ({ setSearchTitle }) => {
                 >
                   Sign Up
                 </Button>
-                <Button
-                  variant="warning"
-                  className="mx-2"
-                  as={Link}
-                  to=""
-                  block
-                  onClick={notify}
-                >
-                  React-Toastify
-                </Button>{" "}
-                <ToastContainer className="mt-5" />
               </>
             )}
             {token && (
@@ -130,7 +106,7 @@ const Header = ({ setSearchTitle }) => {
                 onClick={handleLogout}
                 block
               >
-                logOut
+                Log Out
               </Button>
             )}{" "}
           </Nav>

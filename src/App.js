@@ -10,8 +10,9 @@ function App() {
     fetch("data.json")
       .then((response) => response.json())
       .then((data) => setCards(data))
-      .catch((error) => console.error(error))
+      .catch((error) => console.error(error)),
   ]);
+  
   // function generateCardsData(numberOfCards) {
   //   const baseUrl =
   //     "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg";
@@ -101,7 +102,6 @@ function App() {
     fetchData();
   }, []);
 
-
   function formatPublishedDate(dateString) {
     const date = new Date(dateString);
     const now = new Date();
@@ -109,9 +109,9 @@ function App() {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     if (diffDays === 0) {
-      return 'Publicado hoy';
+      return "Publicado hoy";
     } else if (diffDays === 1) {
-      return 'Publicado hace 1 día';
+      return "Publicado hace 1 día";
     } else {
       return `Publicado hace ${diffDays} días`;
     }
