@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const jwt = require("jsonwebtoken");
 // Obtener lista de la base de datos
 async function getItems(req, res) {
-  const items = await Cards.find();
+  const items = await Cards.find({ visible: true });
   res.json(items);
 }
 
