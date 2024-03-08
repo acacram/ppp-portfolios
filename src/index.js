@@ -37,6 +37,7 @@ root.render(
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/userDashboard" element={<UserDashboard />} />
           <Route path="/create" element={<Create />} />
+          <Route path="/edit" element={<Edit />} />
         </Routes>
   </MainContent>
         <Footer />
