@@ -1,7 +1,7 @@
 // index.js
 
 import React from 'react';
-import { createRoot } from 'react-dom/client'; // Cambia la importación de createRoot
+import { createRoot } from 'react-dom/client'; // Change the import for createRoot
 import './Styles/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -16,21 +16,38 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import styled from 'styled-components';
 
-
+/**
+ * Create a browser history instance.
+ * @type {Object}
+ */
 const history = createBrowserHistory();
-const root = createRoot(document.getElementById('root')); // Utiliza createRoot
+
+/**
+ * Create a root for rendering React elements.
+ * @type {Object}
+ */
+const root = createRoot(document.getElementById('root'));
+
+/**
+ * Set the scroller value for calculating the main content height.
+ * @type {number}
+ */
 const scroller = 90;
 
+/**
+ * Styled component for the main content container.
+ * @type {Object}
+ */
 const MainContent = styled.div`
-  min-height: calc(100vh - ${scroller}px); /* Calcula la altura del contenido principal */
+  min-height: calc(100vh - ${scroller}px); /* Calculate the height of the main content */
   display: flex;
   flex-direction: column;
-  `;
+`;
 
-// VISTAS FRONT
+// FRONT VIEWS
 root.render(
   <Router history={history}>
-      <React.StrictMode>
+    <React.StrictMode>
       <MainContent>
         <Routes className="w-100 h-100">
           <Route path="/" element={<App />} />
@@ -40,10 +57,11 @@ root.render(
           <Route path="/create" element={<Create />} />
           <Route path="/edit" element={<Edit />} />
         </Routes>
-  </MainContent>
-        <Footer />
-      </React.StrictMode>
-    </Router>
+      </MainContent>
+      <Footer />
+    </React.StrictMode>
+  </Router>
 );
 
+// Measure the performance of the React application.
 reportWebVitals();

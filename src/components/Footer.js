@@ -1,6 +1,22 @@
 import React from 'react';
 import "../Styles/footer.css";
 
+/**
+ * Componente funcional que representa el pie de página de la aplicación.
+ *
+ * @component
+ * @example
+ * // Ejemplo de uso:
+ * import Footer from './Footer';
+ * const App = () => {
+ *   return (
+ *     <div>
+ *       {/* Otras partes de la aplicación *\/}
+ *       <Footer />
+ *     </div>
+ *   );
+ * }
+ */
 function Footer() {
     return (
         <footer className="bg-dark w-100 footer">

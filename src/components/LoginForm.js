@@ -6,6 +6,22 @@ import "../Styles/App.css";
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 
+/**
+ * Componente funcional que representa el formulario de inicio de sesión.
+ *
+ * @component
+ * @example
+ * // Ejemplo de uso:
+ * import LoginForm from './LoginForm';
+ * const App = () => {
+ *   return (
+ *     <div>
+ *       {/* Otras partes de la aplicación *\/}
+ *       <LoginForm />
+ *     </div>
+ *   );
+ * }
+ */
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +36,11 @@ const LoginForm = () => {
     }
   }, [navigate]);
 
+  /**
+   * Maneja el evento de inicio de sesión del usuario.
+   * @function
+   * @param {Object} e - El evento de formulario.
+   */
   const handleLogin = async (e) => {
     e.preventDefault();
 

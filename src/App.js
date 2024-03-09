@@ -4,16 +4,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
 import "./Styles/App.css";
 
+/**
+ * Main component representing the entire application.
+ * @function App
+ * @returns {JSX.Element} - React component
+ */
 function App() {
+  /**
+   * State to hold the array of cards.
+   * @type {[Object[], Function]}
+   */
   const [cards, setCards] = useState([]);
-  const [exampleCards] = useState([
-    fetch("data.json")
-      .then((response) => response.json())
-      .then((data) => setCards(data))
-      .catch((error) => console.error(error)),
-  ]);
-  
-  // function generateCardsData(numberOfCards) {
+
+    // function generateCardsData(numberOfCards) {
   //   const baseUrl =
   //     "https://img.freepik.com/fotos-premium/gatitos-kawaii-peluche-esponjosos-hermosa-imagen-arte-generado-ai_843679-5987.jpg";
   //   const startDate = new Date("2024-03-01");
@@ -36,56 +39,108 @@ function App() {
   //   return cardsData;
   // }
 
+  /**
+   * State to hold example cards fetched from "data.json".
+   * @type {[Promise, Function]}
+   */
+  const [exampleCards] = useState([
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => setCards(data))
+      .catch((error) => console.error(error)),
+  ]);
+
+  /**
+   * State to hold the search title for filtering cards.
+   * @type {[string, Function]}
+   */
   const [searchTitle, setSearchTitle] = useState("");
+
+  /**
+   * State to hold filtered items based on the search title.
+   * @type {[Object[], Function]}
+   */
   const [filteredItems, setFilteredItems] = useState([]);
+
+  /**
+   * State to hold the current page number.
+   * @type {[number, Function]}
+   */
   const [paginaActual, setPaginaActual] = useState(1);
+
+  /**
+   * Number of elements to display per page.
+   * @type {number}
+   */
   const elementosPorPagina = 9;
+
+  /**
+   * Total number of pages based on filtered items.
+   * @type {number}
+   */
   const totalPaginas = Math.ceil(filteredItems.length / elementosPorPagina);
-  // useEffect(() => {
+
+
+    // useEffect(() => {
   //   // setCards();
   //   // const generadorCards = generateCardsData(100);
   //   setFilteredItems(cards);
   // }, []);
+
+  /**
+   * Function to handle changes in the search title.
+   * @function handleSearchChange
+   */
   const handleSearchChange = () => {
-    // setSearchTitle(value);
     const currentPage = paginaActual; // Store the current page
-    // Update to use filteredData instead of data.tours
     const lowercasedValue = searchTitle.toLowerCase();
     const filtered = cards.filter((item) =>
       item.title.toLowerCase().includes(lowercasedValue)
     );
 
-    // Set the filtered data in the state
     setFilteredItems(filtered);
 
     if (searchTitle === "") {
-      // If search term is empty, keep the current page
       setPaginaActual(currentPage);
       return;
-    }
-
-    // Reset to the first page when there is a search term
-    else setPaginaActual(1);
+    } else setPaginaActual(1);
   };
+
   useEffect(() => {
-    // setCards();
     handleSearchChange();
   }, [searchTitle]);
 
+  /**
+   * Function to retrieve elements for the current page.
+   * @function obtenerElementosPagina
+   * @returns {Object[]} - Array of elements for the current page
+   */
   const obtenerElementosPagina = () => {
     const startIndex = (paginaActual - 1) * elementosPorPagina;
     const endIndex = startIndex + elementosPorPagina;
     return filteredItems.slice(startIndex, endIndex);
   };
+
+  /**
+   * State to indicate if data is currently being loaded.
+   * @type {[boolean, Function]}
+   */
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    /**
+     * Function to fetch data from the server.
+     * @async
+     * @function fetchData
+     */
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/cards ");
+        const response = await fetch("http://localhost:5000/cards");
 
         if (!response.ok) {
-          throw new Error(`Error: ${response.status} - ${response.statusText}`);
+          throw new Error(
+            `Error: ${response.status} - ${response.statusText}`
+          );
         }
 
         const data = await response.json();
@@ -102,6 +157,12 @@ function App() {
     fetchData();
   }, []);
 
+  /**
+   * Function to format the published date for a card.
+   * @function formatPublishedDate
+   * @param {string} dateString - Date string to be formatted
+   * @returns {string} - Formatted date string
+   */
   function formatPublishedDate(dateString) {
     const date = new Date(dateString);
     const now = new Date();
@@ -117,25 +178,20 @@ function App() {
     }
   }
 
-  // Fetch data from DB
-
+  /**
+   * Main render of the App component.
+   */
   return (
     <>
       {loading ? (
-        // Muestra un indicador de carga o un mensaje mientras los datos se cargan
         <p>Cargando...</p>
       ) : (
         <>
           <Header setSearchTitle={setSearchTitle} />
-          {/* Añade el contenedor principal que rodea a todo el contenido de la app */}
           <Container className="w-100 h-100 no-select">
-            {/* Añade el contenido principal en la app */}
-            {/* Dentro del contenedor principal, añade una fila que ocupa toda la ancha del contenedor */}
             <Row className="d-flex justify-content-center">
               <Col xs={9}>
-                {/* Crea una fila que se ajusta al ancho de la pantalla y que contiene columnas de tamaño variable */}
-                <Row className="d-flex  justify-content-center align-items-stretch py-4">
-                  {/* Recorre el arreglo con los datos y muestra una columna por cada dato */}
+                <Row className="d-flex justify-content-center align-items-stretch py-4">
                   {obtenerElementosPagina().map((card, index) => (
                     <Col
                       key={index}
@@ -152,7 +208,7 @@ function App() {
                         />
                         <h3 className="mt-2 overflow-ellipsis">{card.title}</h3>
                         <p className="card-text text-center">{card.text}</p>
-                        <p className=" border-2 border border-black p-2 rounded-4">
+                        <p className="border-2 border border-black p-2 rounded-4">
                           {formatPublishedDate(card.date)}
                         </p>
                       </Card>
@@ -162,7 +218,6 @@ function App() {
               </Col>
             </Row>
             <Row className="d-flex justify-content-around align-items-center w-auto my-3">
-              {/* y */}
               <Col
                 xs={3}
                 className="w-auto h-auto d-flex py-3 px-3 rounded-5"
@@ -184,17 +239,16 @@ function App() {
                     d="M16 22L6 12L16 2l1.775 1.775L9.55 12l8.225 8.225z"
                   />
                 </svg>
-              </Col>{" "}
+              </Col>
               <Col
                 xs={6}
                 className="w-auto h-auto rounded"
                 style={{ backgroundColor: "#d3cee1" }}
               >
                 <h4 className="text-environment-color mt-1 text-black">
-                  {" "}
                   {paginaActual} / {totalPaginas}
                 </h4>
-              </Col>{" "}
+              </Col>
               <Col
                 xs={3}
                 className="w-auto h-auto d-flex py-3 px-3 rounded-5"

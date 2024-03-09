@@ -1,11 +1,32 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 
+/**
+ * Componente funcional que representa el formulario de registro.
+ *
+ * @component
+ * @example
+ * // Ejemplo de uso:
+ * import SignUp from './SignUp';
+ * const App = () => {
+ *   return (
+ *     <div>
+ *       {/* Otras partes de la aplicación *\/}
+ *       <SignUp />
+ *     </div>
+ *   );
+ * }
+ */
 const SignUp = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    /**
+     * Maneja el evento de registro del usuario.
+     * @function
+     * @param {Object} e - El evento de formulario.
+     */
     const handleSignUp = async (e) => {
         e.preventDefault();
 
@@ -16,19 +37,13 @@ const SignUp = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/auth/signup', { // Aquí debes asegurarte de que la URL sea correcta
+            const response = await fetch('http://localhost:5000/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }), // Solo envía el nombre de usuario y la contraseña al servidor
+                body: JSON.stringify({ username, password }),
             });
-
-            if (response.ok) {
-                console.log('SignUp successful');
-            } else {
-                console.error('SignUp failed');
-            }
         } catch (error) {
             console.error('Error during SignUp:', error);
         }

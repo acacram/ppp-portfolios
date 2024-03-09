@@ -17,12 +17,36 @@ import "../Styles/header.css";
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 import { useNavigate } from "react-router-dom";
-const notify = () => toast("Has presionado el botón");
 
+/**
+ * Componente funcional que representa el encabezado de la aplicación.
+ *
+ * @component
+ * @param {Object} props - Las propiedades del componente.
+ * @param {Function} props.setSearchTitle - Función para establecer el título de búsqueda.
+ * @example
+ * // Ejemplo de uso:
+ * import Header from './Header';
+ * const App = () => {
+ *   const setSearchTitle = (title) => {
+ *     // Lógica para establecer el título de búsqueda
+ *   };
+ *   return (
+ *     <div>
+ *       {/* Otras partes de la aplicación *\/}
+ *       <Header setSearchTitle={setSearchTitle} />
+ *     </div>
+ *   );
+ * }
+ */
 const Header = ({ setSearchTitle }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
+  /**
+   * Maneja el cierre de sesión del usuario.
+   * @function
+   */
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");

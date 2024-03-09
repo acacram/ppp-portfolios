@@ -15,32 +15,49 @@ import { jwtDecode } from "jwt-decode";
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 
+/**
+ * Componente funcional que representa la página de creación de elementos.
+ *
+ * @component
+ * @example
+ * // Ejemplo de uso:
+ * import Create from './Create';
+ * const App = () => {
+ *   return <Create />;
+ * }
+ */
 const Create = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [image, setImage] = useState(null); // Cambiado a null
+  const [image, setImage] = useState(null);
   const [visible, setVisible] = useState(false);
-  const [showTitleAlert, setShowTitleAlert] = useState(false); // Estado para controlar la visibilidad de la alerta del título
-  const [showTextAlert, setShowTextAlert] = useState(false); // Estado para controlar la visibilidad de la alerta del texto
-  const [showImageAlert, setShowImageAlert] = useState(false); // Estado para controlar la visibilidad de la alerta de la imagen
+  const [showTitleAlert, setShowTitleAlert] = useState(false);
+  const [showTextAlert, setShowTextAlert] = useState(false);
+  const [showImageAlert, setShowImageAlert] = useState(false);
   const navigate = useNavigate();
 
+  /**
+   * Maneja la creación de un nuevo elemento.
+   *
+   * @param {Object} e - Evento de formulario.
+   * @returns {void}
+   */
   const handleCreate = async (e) => {
     e.preventDefault();
 
     // Validar campos obligatorios individualmente
     if (!title) {
-      setShowTitleAlert(true); // Mostrar alerta si el título está vacío
+      setShowTitleAlert(true);
       return;
     }
 
     if (!text) {
-      setShowTextAlert(true); // Mostrar alerta si el texto está vacío
+      setShowTextAlert(true);
       return;
     }
 
     if (!image) {
-      setShowImageAlert(true); // Mostrar alerta si la imagen no está seleccionada
+      setShowImageAlert(true);
       return;
     }
 
@@ -49,11 +66,11 @@ const Create = () => {
       const decodedToken = jwtDecode(token);
       const userId = decodedToken.userId;
 
-      const formData = new FormData(); // Crea un objeto FormData para enviar archivos
+      const formData = new FormData();
       formData.append("title", title);
       formData.append("text", text);
       formData.append("visible", visible);
-      formData.append("image", image); // Agrega la imagen al objeto FormData
+      formData.append("image", image);
       formData.append("userId", userId);
 
       const response = await fetch("http://localhost:5000/cards/createItem", {
@@ -61,13 +78,11 @@ const Create = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: formData, // Envía el objeto FormData en lugar de JSON.stringify
+        body: formData,
       });
 
       if (response.ok) {
         navigate(-1);
-        // const data = await response.json();
-        // console.log(data.message);
 
         Toastify({
           text: "Item creado correctamente",

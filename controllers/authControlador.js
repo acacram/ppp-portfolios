@@ -2,7 +2,27 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User"); // Importa el modelo User
 
+/**
+ * Maneja la lógica de inicio de sesión.
+ *
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>} Promesa sin valor de retorno explícito.
+ */
 async function login(req, res) {
+  /**
+   * Objeto que contiene las credenciales de inicio de sesión.
+   *
+   * @typedef {Object} Credentials
+   * @property {string} username - Nombre de usuario.
+   * @property {string} password - Contraseña del usuario.
+   */
+
+  /**
+   * @type {Credentials}
+   */
   const { username, password } = req.body;
 
   try {
@@ -14,7 +34,11 @@ async function login(req, res) {
       return res.status(401).json({ message: "Credenciales inválidas" });
     }
 
-    // Genera el token de autenticación con el ID del usuario
+    /**
+     * Token de autenticación generado para el usuario.
+     *
+     * @type {string}
+     */
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     }); // Usar tu propia clave secreta
@@ -27,6 +51,15 @@ async function login(req, res) {
   }
 }
 
+/**
+ * Maneja la lógica de cierre de sesión.
+ *
+ * @function
+ * @async
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>} Promesa sin valor de retorno explícito.
+ */
 async function logout(req, res) {
   try {
     // Respuesta exitosa
