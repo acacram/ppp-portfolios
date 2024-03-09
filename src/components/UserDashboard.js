@@ -9,33 +9,89 @@ import {
   faLock,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import "../Styles/user.css";
 
 /**
- * Componente funcional que representa el panel de control del usuario.
- *
+ * Componente principal para el panel de usuario.
  * @component
- * @example
- * // Ejemplo de uso:
- * import UserDashboard from './UserDashboard';
- * const App = () => {
- *   return (
- *     <div>
- *       {/* Otras partes de la aplicación *\/}
- *       <UserDashboard />
- *     </div>
- *   );
- * }
+ * @return {JSX.Element} El componente principal del panel de usuario.
  */
 const UserDashboard = () => {
+  /**
+   * Estado para almacenar las cartas.
+   * @type {Array}
+   */
   const [cards, setCards] = useState([]);
+  
+  /**
+   * Estado para almacenar el título de búsqueda.
+   * @type {string}
+   */
   const [searchTitle, setSearchTitle] = useState("");
 
   /**
-   * Formatea la fecha de publicación de la nota.
+   * Maneja la eliminación de una carta.
+   * @async
    * @function
-   * @param {string} dateString - La cadena de fecha a formatear.
-   * @returns {string} - La cadena formateada que representa la diferencia de días.
+   * @param {string} _id - ID de la carta a eliminar.
+   * @returns {Promise<void>} Promesa que se resuelve después de procesar la eliminación.
+   */
+  const handleDelete = async (_id) => {
+    const confirmDelete = window.confirm(
+      "¿Estás seguro de que deseas eliminar esta carta?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `http://localhost:5000/cards/deleteItem/${_id}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        alert("Carta eliminada con éxito");
+      } else {
+        alert("Ocurrió un error al intentar eliminar la carta");
+      }
+    } catch (error) {
+      console.error("Error al eliminar la carta:", error);
+      alert("Error al eliminar la carta");
+    }
+  };
+
+  /**
+   * Obtiene datos de la base de datos al montar el componente.
+   * @effect
+   */
+  useEffect(() => {
+    const fetchDataFromDatabase = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/cards/getItem/" + localStorage.getItem("token")
+        );
+        const data = await response.json();
+        console.log("Data:", data.items);
+        const items = data.items;
+        setCards(Array.isArray(items) ? items : []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchDataFromDatabase();
+  }, []);
+
+  /**
+   * Formatea la fecha de publicación de una carta.
+   * @function
+   * @param {string} dateString - Cadena de fecha a formatear.
+   * @returns {string} - Cadena de fecha formateada.
    */
   function formatPublishedDate(dateString) {
     const date = new Date(dateString);
@@ -52,29 +108,11 @@ const UserDashboard = () => {
     }
   }
 
-  // Importa datos de la base de datos al montar el componente
-  useEffect(() => {
-    const fetchDataFromDatabase = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:5000/cards/getItem/" + localStorage.getItem("token")
-        );
-        const data = await response.json();
-        //console.log("Data:", data.items); // Verifica los datos en la consola
-        const items = data.items;
-        setCards(Array.isArray(items) ? items : []); // Asegurarse de que data sea un array antes de establecer el estado
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchDataFromDatabase();
-  }, []);
-
   return (
     <>
       <Header setSearchTitle={setSearchTitle} />
       <Container className="w-100 h-100 no-select">
-        <Container fluid className="text-primary p-4">
+        <Container fluid className="bg-info text-primary p-4">
           <Row className="d-flex justify-content-center align-items-stretch py-4">
             {/* Columna para notas públicas */}
             <Col className="bg-secondary" xs={12} lg={6}>
@@ -95,7 +133,7 @@ const UserDashboard = () => {
                         className="d-flex justify-content-center align-items-center"
                       >
                         <Card
-                          className="cardUser full-card border-0 rounded-3 px-3 py-2"
+                          className="full-card border-0 rounded-3 px-3 py-2"
                           style={{ width: "100px" }}
                         >
                           <img
@@ -111,16 +149,24 @@ const UserDashboard = () => {
                             {formatPublishedDate(card.date)}
                           </p>
                           <div className="d-flex justify-content-between mt-2">
-                            <FontAwesomeIcon
-                              icon={faPenSquare}
-                              className="edit-icon me-1"
-                              size="1x"
-                            />
-                            <FontAwesomeIcon
-                              icon={faTrash}
-                              className="trash-icon"
-                              size="1x"
-                            />
+                            <Link to="/edit">
+                              <FontAwesomeIcon
+                                icon={faPenSquare}
+                                className="edit-icon me-1"
+                                size="1x"
+                              />
+                            </Link>
+                            {cards.length > 0 && (
+                              <div key={cards[0]._id}>
+                                <FontAwesomeIcon
+                                  icon={faTrash}
+                                  className="trash-icon"
+                                  size="1x"
+                                  onClick={() => handleDelete(cards[0]._id)}
+                                  style={{ cursor: "pointer", color: "red" }}
+                                />
+                              </div>
+                            )}
                           </div>
                         </Card>
                       </Col>
@@ -147,7 +193,7 @@ const UserDashboard = () => {
                         className="d-flex justify-content-center align-items-center"
                       >
                         <Card
-                          className="cardUser full-card border-0 rounded-3 px-3 py-2"
+                          className="full-card border-0 rounded-3 px-3 py-2"
                           style={{ width: "100px" }}
                         >
                           <img
@@ -163,16 +209,24 @@ const UserDashboard = () => {
                             {new Date(card.date).toISOString().split("T")[0]}
                           </p>
                           <div className="d-flex justify-content-between mt-2">
-                            <FontAwesomeIcon
-                              icon={faPenSquare}
-                              className="edit-icon me-1"
-                              size="1x"
-                            />
-                            <FontAwesomeIcon
-                              icon={faTrash}
-                              className="trash-icon"
-                              size="1x"
-                            />
+                            <Link to="/edit">
+                              <FontAwesomeIcon
+                                icon={faPenSquare}
+                                className="edit-icon me-1"
+                                size="1x"
+                              />
+                            </Link>
+                            {cards.length > 0 && (
+                              <div key={cards[0]._id}>
+                                <FontAwesomeIcon
+                                  icon={faTrash}
+                                  className="trash-icon"
+                                  size="1x"
+                                  onClick={() => handleDelete(cards[0]._id)}
+                                  style={{ cursor: "pointer", color: "red" }}
+                                />
+                              </div>
+                            )}
                           </div>
                         </Card>
                       </Col>
